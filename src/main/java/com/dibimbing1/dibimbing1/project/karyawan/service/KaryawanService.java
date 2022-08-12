@@ -4,12 +4,15 @@ import com.dibimbing1.dibimbing1.project.karyawan.model.Karyawan;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public interface KaryawanService {
-    public Karyawan save(Karyawan obj);
-    public Karyawan update(Karyawan obj);
-    public List<Karyawan> deleted(Long id);
-    public List<Karyawan> dataKaryawan(int row,int page);
-    public Karyawan findById(long id);
+    public Map insert(Karyawan karyawan);
+    public Map update(Karyawan karyawan);
+    public Map delete(Long karyawan);
+    public Map getAll(int size, int page);
+
+    public Map getById(Karyawan karyawan);
 }
+

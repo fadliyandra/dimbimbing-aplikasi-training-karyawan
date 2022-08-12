@@ -1,7 +1,15 @@
 package com.dibimbing1.dibimbing1.project.karyawan.service.impl;
 
 import com.dibimbing1.dibimbing1.project.karyawan.model.Karyawan;
+import com.dibimbing1.dibimbing1.project.karyawan.repository.KaryawanRepository;
 import com.dibimbing1.dibimbing1.project.karyawan.service.KaryawanService;
+import com.dibimbing1.dibimbing1.project.karyawan.utils.TemplateResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
@@ -9,78 +17,135 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class KaryawanImpl implements KaryawanService {
-    static List<Karyawan> listKaryawan = new ArrayList<>();
-    static int idIncrement = 0;
-    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    Date date;
+
+    public static final Logger log = LoggerFactory.getLogger(KaryawanImpl.class);
+    @Autowired
+    KaryawanRepository karyawanRepository;
+    @Autowired
+    TemplateResponse templateResponse;
+
+    public SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    public SimpleDateFormat dfDOB = new SimpleDateFormat("yyyy-MM-dd");
+
+    String a = dfDate.format(new java.sql.Date(new Date().getTime()));
+    java.sql.Date getDate = new java.sql.Date(new Date().getTime());
 
     @Override
-    public Karyawan save(Karyawan obj) {
-        date = new Date();
-        obj.setId(idIncrement++);
-        obj.setUpdated_date(null);
-        obj.setCreated_date(dateFormat.format(date.getTime()));
-        listKaryawan.add(obj);
-        return obj;
-    }
+    public Map insert(Karyawan karyawan) {
 
-    @Override
-    public Karyawan update(Karyawan obj) {
-        for(Karyawan data: listKaryawan) {
-            if(obj.getId() == data.getId()) {
-                date = new Date();
-                Karyawan update = new Karyawan();
-                update.setId(obj.getId());
-                update.setName(obj.getName());
-                update.setJk(obj.getJk());
-                update.setDob(obj.getDob());
-                update.setAlamat(obj.getAlamat());
-                update.setStatus(obj.getStatus());
-                update.setCreated_date(obj.getCreated_date());
-                update.setUpdated_date(dateFormat.format(date.getTime()));
-                listKaryawan.remove(data);
-                listKaryawan.add(update);
-                return update;
+        try {
+            if (templateResponse.checkNull(karyawan.getNama())) {
+                return templateResponse.templateError("Nama Tidak Boleh Kosong");
             }
-        }
-        return null;
-    }
-
-    @Override
-    public List<Karyawan> deleted(Long id) {
-        for (Karyawan data: listKaryawan) {
-            if (id == data.getId()) {
-                Karyawan update = new Karyawan();
-                update.setId(data.getId());
-                update.setName(data.getName());
-                update.setJk(data.getJk());
-                update.setDob(data.getDob());
-                update.setAlamat(data.getAlamat());
-                update.setStatus(data.getStatus());
-                update.setCreated_date(data.getCreated_date());
-                update.setUpdated_date(data.getUpdated_date());
-                listKaryawan.remove(data);
-                return listKaryawan;
+            if (templateResponse.checkNull(karyawan.getJk())) {
+                return templateResponse.templateError("Jenis Kelamin Tidak Boleh Kosong");
             }
-        }
-        return null;
-    }
-
-    @Override
-    public List<Karyawan> dataKaryawan(int row, int page) {
-        return listKaryawan;
-    }
-
-    @Override
-    public Karyawan findById(long id) {
-        for(Karyawan data: listKaryawan) {
-            if (id == data.getId()) {
-                return data;
+            if (templateResponse.checkNull(karyawan.getDob())) {
+                return templateResponse.templateError("Tanggal Lahir Tidak Boleh Kosong");
             }
+            if (templateResponse.checkNull(karyawan.getAlamat())) {
+                return templateResponse.templateError("Alamat Tidak Boleh Kosong");
+            }
+            if (templateResponse.checkNull(karyawan.getStatus())) {
+                return templateResponse.templateError("Status Tidak Boleh Kosong");
+            }
+
+            karyawan.setCreated_date(new Date());
+            karyawan.setUpdated_date(new Date());
+
+            Karyawan karyawanObj = karyawanRepository.save(karyawan);
+            log.info("{}", "Sukses Insert");
+            return templateResponse.templateSukses(karyawanObj);
+        } catch (Exception e) {
+            log.info("{}", "Eror: " + e);
+            return templateResponse.templateError(e);
         }
-        return null;
+    }
+
+    @Override
+    public Map update(Karyawan karyawan) {
+
+        try {
+            if (templateResponse.checkNull(karyawan.getId())) {
+                return templateResponse.templateError("Id Tidak Boleh Kosong");
+            }
+
+            Karyawan checkIdKaryawan = karyawanRepository.getbyID(karyawan.getId());
+            if(templateResponse.checkNull(checkIdKaryawan)) {
+                return templateResponse.templateError("Id Tidak Ditemukan");
+            }
+
+            checkIdKaryawan.setNama(karyawan.getNama());
+            checkIdKaryawan.setJk(karyawan.getJk());
+            checkIdKaryawan.setDob(karyawan.getDob());
+            checkIdKaryawan.setAlamat(karyawan.getAlamat());
+            checkIdKaryawan.setStatus(karyawan.getStatus());
+            checkIdKaryawan.setUpdated_date(new Date());
+            Karyawan karyawanObj = karyawanRepository.save(checkIdKaryawan);
+            log.info("{}", "Sukses Update");
+            return templateResponse.templateSukses(karyawanObj);
+        } catch (Exception e) {
+            log.info("{}", "Eror di method update: " + e);
+            return templateResponse.templateError(e);
+        }
+    }
+
+    @Override
+    public Map delete(Long karyawan) {
+        try {
+            if (templateResponse.checkNull(karyawan)) {
+                return templateResponse.templateError("Id Tidak Boleh Kosong");
+            }
+
+            Karyawan checkIdKaryawan = karyawanRepository.getbyID(karyawan);
+            if(templateResponse.checkNull(checkIdKaryawan)) {
+                return templateResponse.templateError("Id Tidak Ditemukan");
+            }
+
+            karyawanRepository.deleteById(karyawan);
+            checkIdKaryawan.setDeleted_date(new Date());
+
+            log.info("{}", "Sukses Deleted");
+            return templateResponse.templateSukses("sukses deleted");
+        }catch (Exception e) {
+            log.info("{}", "Eror di method delete: " + e);
+            return templateResponse.templateError(e);
+        }
+    }
+
+    @Override
+    public Map getAll(int size, int page) {
+        try {
+            Pageable show_data = PageRequest.of(page,size);
+            Page<Karyawan> list = karyawanRepository.getAllData(show_data);
+            return templateResponse.templateSukses(list);
+        }catch (Exception e) {
+            log.info("{}", "Eror di method getAll: " + e);
+            return templateResponse.templateError(e);
+        }
+    }
+
+    public Map getById(Karyawan karyawan) {
+        try {
+            if (templateResponse.checkNull(karyawan)) {
+                return templateResponse.templateError("Id Tidak Boleh Kosong");
+            }
+
+            Karyawan checkIdKaryawan = karyawanRepository.getbyID(karyawan.getId());
+            if(templateResponse.checkNull(checkIdKaryawan)) {
+                return templateResponse.templateError("Id Tidak Ditemukan");
+            }
+
+            log.info("{}", "Sukses getById");
+            return templateResponse.templateSukses(checkIdKaryawan);
+        }catch (Exception e) {
+            log.info("{}", "Eror di method getById: " + e);
+            return templateResponse.templateError(e);
+        }
     }
 }
+
