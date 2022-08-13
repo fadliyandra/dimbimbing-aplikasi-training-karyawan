@@ -2,6 +2,8 @@ package com.dibimbing1.dibimbing1.project.karyawan.mybatis.service;
 
 //import com.dibimbing.latihanspringboot.mybatis.model.KaryawanMybatis;
 
+import com.dibimbing1.dibimbing1.project.karyawan.mybatis.model.KaryawanMybatis;
+
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,10 @@
 package com.dibimbing1.dibimbing1.project.karyawan.mybatis.controller;
 
 
+import com.dibimbing1.dibimbing1.project.karyawan.model.Karyawan;
+import com.dibimbing1.dibimbing1.project.karyawan.mybatis.model.KaryawanMybatis;
+import com.dibimbing1.dibimbing1.project.karyawan.mybatis.service.KaryawanServiceMybatis;
+import com.dibimbing1.dibimbing1.project.karyawan.utils.TemplateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

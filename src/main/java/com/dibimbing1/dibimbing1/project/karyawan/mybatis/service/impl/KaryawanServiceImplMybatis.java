@@ -1,11 +1,17 @@
 package com.dibimbing1.dibimbing1.project.karyawan.mybatis.service.impl;
 
-import com.dibimbing.latihanspringboot.model.Karyawan;
-import com.dibimbing.latihanspringboot.mybatis.model.KaryawanMybatis;
-import com.dibimbing.latihanspringboot.mybatis.repository.KaryawanRepoMybatis;
-import com.dibimbing.latihanspringboot.mybatis.service.KaryawanServiceMybatis;
-import com.dibimbing.latihanspringboot.utils.QuerySP;
-import com.dibimbing.latihanspringboot.utils.TemplateResponse;
+//import com.dibimbing.latihanspringboot.model.Karyawan;
+//import com.dibimbing.latihanspringboot.mybatis.model.KaryawanMybatis;
+//import com.dibimbing.latihanspringboot.mybatis.repository.KaryawanRepoMybatis;
+//import com.dibimbing.latihanspringboot.mybatis.service.KaryawanServiceMybatis;
+//import com.dibimbing.latihanspringboot.utils.QuerySP;
+//import com.dibimbing.latihanspringboot.utils.TemplateResponse;
+import com.dibimbing1.dibimbing1.project.karyawan.model.Karyawan;
+import com.dibimbing1.dibimbing1.project.karyawan.mybatis.model.KaryawanMybatis;
+import com.dibimbing1.dibimbing1.project.karyawan.mybatis.repository.KaryawanRepoMybatis;
+import com.dibimbing1.dibimbing1.project.karyawan.mybatis.service.KaryawanServiceMybatis;
+import com.dibimbing1.dibimbing1.project.karyawan.utils.QuerySP;
+import com.dibimbing1.dibimbing1.project.karyawan.utils.TemplateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
