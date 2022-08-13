@@ -26,7 +26,7 @@ public class Karyawan implements Serializable {
     private String jk;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "dob", nullable = false)
+    @Column(name = "dob", nullable = true)
     private java.sql.Date dob;
 
     @Column(name = "alamat", nullable = false, length = 500)
