@@ -45,15 +45,15 @@ public class KaryawanJunitRestTemplateMybatis {
         headers.set("Accept", "*/*");
         headers.set("Content-Type", "application/json");
         String bodyTesting = "{\n"+
-                "    \"nama\":\"Dadang 2\",\n" +
+                "    \"nama\":\"jack sparow\",\n" +
                 "    \"jk\":\"Laki-laki\",\n" +
-                "    \"dob\":\"2001-01-01\",\n" +
-                "    \"alamat\":\"Jalan Kemayoran Jakarta Pusat\",\n" +
+                "    \"dob\":\"2004-01-01\",\n" +
+                "    \"alamat\":\"kemanggisan\",\n" +
                 "    \"status\":\"Kontrak\"\n" +
                 "}";
         HttpEntity<String> entity = new HttpEntity<String>(bodyTesting, headers);
         System.out.println("bodyTesting  =" + bodyTesting);
-        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9090/api/v1/sp/karyawan/save", HttpMethod.POST, entity, String.class);
+        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9092/api/v1/sp/karyawan/save", HttpMethod.POST, entity, String.class);
         System.out.println("response  =" + exchange.getBody());
         assertEquals(HttpStatus.OK, exchange.getStatusCode());
     }
@@ -64,16 +64,16 @@ public class KaryawanJunitRestTemplateMybatis {
         headers.set("Accept", "*/*");
         headers.set("Content-Type", "application/json");
         String bodyTesting = "{\n"+
-                "    \"id\":\"2\",\n" +
-                "    \"nama\":\"Diding\",\n" +
+                "    \"id\":\"8\",\n" +
+                "    \"nama\":\"jack sparow 1\",\n" +
                 "    \"jk\":\"Laki-laki\",\n" +
-                "    \"dob\":\"2001-01-01\",\n" +
-                "    \"alamat\":\"Jalan Senen Jakarta Pusat\",\n" +
+                "    \"dob\":\"2002-01-01\",\n" +
+                "    \"alamat\":\"Jatim\",\n" +
                 "    \"status\":\"Kontrak\"\n" +
                 "}";
         HttpEntity<String> entity = new HttpEntity<String>(bodyTesting, headers);
         System.out.println("bodyTesting  =" + bodyTesting);
-        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9090/api/v1/sp/karyawan/update", HttpMethod.PUT, entity, String.class);
+        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9092/api/v1/sp/karyawan/update", HttpMethod.PUT, entity, String.class);
         System.out.println("response  =" + exchange.getBody());
         assertEquals(HttpStatus.OK, exchange.getStatusCode());
     }
@@ -83,8 +83,8 @@ public class KaryawanJunitRestTemplateMybatis {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", "*/*");
         headers.set("Content-Type", "application/json");
-        int id = 3;
-        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9090/api/v1/sp/karyawan/delete/" + id, HttpMethod.DELETE, null, String.class);
+        int id = 7;
+        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9092/api/v1/sp/karyawan/delete/" + id, HttpMethod.DELETE, null, String.class);
         System.out.println("response  =" + exchange.getBody());
         assertEquals(HttpStatus.OK, exchange.getStatusCode());
     }
@@ -94,8 +94,8 @@ public class KaryawanJunitRestTemplateMybatis {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", "*/*");
         headers.set("Content-Type", "application/json");
-        Integer id = 2;
-        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9090/api/v1/sp/karyawan/"+id, HttpMethod.GET, null, String.class);
+        Integer id = 8;
+        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9092/api/v1/sp/karyawan/"+id, HttpMethod.GET, null, String.class);
         System.out.println("response  =" + exchange.getBody());
         assertEquals(HttpStatus.OK, exchange.getStatusCode());
     }
@@ -105,8 +105,8 @@ public class KaryawanJunitRestTemplateMybatis {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             jdbcTemplate.execute(querySP.getKaryawanByName);
-            System.out.println("response  1=" + karyawanServiceMybatis.getKaryawanByName("%di%"));
-            List<KaryawanMybatis> list = karyawanServiceMybatis.getKaryawanByName("%di%");
+            System.out.println("response  1=" + karyawanServiceMybatis.getKaryawanByName("%mi%"));
+            List<KaryawanMybatis> list = karyawanServiceMybatis.getKaryawanByName("%mi%");
             for (KaryawanMybatis data : list) {
                 System.out.println("data ke ============== ");
                 System.out.println("id=" + data.getResid());
