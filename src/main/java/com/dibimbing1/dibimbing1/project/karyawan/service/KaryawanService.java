@@ -12,7 +12,7 @@ public interface KaryawanService {
     public Map update(Karyawan karyawan);
     public Map delete(Long karyawan);
     public Map getAll(int size, int page);
+    public Map getbyIDKaryawan(Long karyawanID);
+    public Map listNamaKaryawan(String nama, Integer page, Integer size);
 
-    public Map getById(Karyawan karyawan);
 }
-

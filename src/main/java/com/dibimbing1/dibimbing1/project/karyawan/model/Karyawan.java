@@ -1,50 +1,48 @@
 package com.dibimbing1.dibimbing1.project.karyawan.model;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.Where;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Entity
 @Table(name = "karyawan")
 @Where(clause = "deleted_date is null")
-public class Karyawan implements Serializable {
+public class Karyawan extends AbstractDate implements Serializable {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "nama", nullable = false, length = 100)
     private String nama;
 
-    @Column(name = "jk", nullable = false, length = 15)
+    @Column(name = "jk", nullable = false, length = 45)
     private String jk;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "dob", nullable = true)
-    private java.sql.Date dob;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "dob", nullable = false)
+    private Date dob;
 
-    @Column(name = "alamat", nullable = false, length = 500)
+    @Column(name = "alamat", nullable = false)
     private String alamat;
 
     @Column(name = "status", nullable = false, length = 50)
     private String status;
 
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    @Column(name = "created_date")
-    private java.util.Date created_date;
+//    @JsonIgnore
+//    @OneToMany(targetEntity = Rekening.class, cascade = CascadeType.MERGE)
+//    private List<Rekening> rekening;
 
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    @Column(name = "updated_date")
-    private java.util.Date updated_date;
+//    @JsonIgnore
+//    @OneToMany(targetEntity = KaryawanTraining.class, cascade = CascadeType.MERGE)
+//    private List<KaryawanTraining> karyawanTraining;
 
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    @Column(name = "deleted_date")
-    private java.util.Date deleted_date;
 
 }

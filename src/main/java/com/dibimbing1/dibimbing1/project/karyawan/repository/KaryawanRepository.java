@@ -8,19 +8,17 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public interface KaryawanRepository extends PagingAndSortingRepository<Karyawan, Long> {
 
-    // JPQ
-    @Query("select c from Karyawan c")// nama class
-    public Page<Karyawan> getAllData(Pageable pageable);
-    // JPQ
-    @Query("select c from Karyawan c WHERE c.id = :karyawanId")
-    public Karyawan getbyID(@Param("karyawanId") Long idKaryawan);
-    // jPQL
-    public Karyawan findOneById(Long id);
 
-    // native query
-    @Query(value = "select c from Karyawan c WHERE c.id = :karyawanId", nativeQuery = true)
-    public Object getbyIDNativeQuery(@Param("karyawanId") Long idKaryawan);
+    @Query("select k from Karyawan k")
+    public Page<Karyawan> getAllData(Pageable pageable);
+
+    @Query("select k from Karyawan k where k.id = :idkaryawan")
+    public Karyawan getbyIDKaryawan(@Param("idkaryawan") Long idbebas);
+
+    @Query("select k from Karyawan k where k.nama = :nama")
+    public Page<Karyawan> listNamaKaryawan(String nama, Pageable pageable);
 }
