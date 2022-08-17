@@ -42,7 +42,7 @@ public class KaryawanJunitRestTemplateMybatis {
         headers.set("Content-Type", "application/json");
         String bodyTesting = "{\n" +
                 "    \"id\":null,\n" +
-                "    \"nama\":\"fadli yandra\",\n" +
+                "    \"nama\":\"fadli yandra1\",\n" +
                 "    \"jk\":\"laki-laki\",\n" +
                 "    \"dob\":\"1993-04-27\",\n" +
                 "    \"alamat\":\"Jakarta\",\n" +
@@ -64,7 +64,7 @@ public class KaryawanJunitRestTemplateMybatis {
         headers.set("Content-Type", "application/json");
         String bodyTesting = "{\n" +
                 "    \"id\":\"6\",\n" +
-                "    \"nama\":\"fitria\",\n" +
+                "    \"nama\":\"anes fitria\",\n" +
                 "    \"jk\":\"Wanita\",\n" +
                 "    \"dob\":\"1992-27-07\",\n" +
                 "    \"alamat\":\"padang\",\n" +
@@ -83,7 +83,7 @@ public class KaryawanJunitRestTemplateMybatis {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", "*/*");
         headers.set("Content-Type", "application/json");
-        long id = 7L;
+        long id = 6L;
         ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9092/api/v1/sp/karyawan/"+id, HttpMethod.GET, null, String.class);
         System.out.println("response  =" + exchange.getBody());
         assertEquals(HttpStatus.OK, exchange.getStatusCode());
@@ -94,7 +94,7 @@ public class KaryawanJunitRestTemplateMybatis {
         headers.set("Accept", "*/*");
         headers.set("Content-Type", "application/json");
 
-        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9092/api/v1/sp/karyawan/list?nama=ar", HttpMethod.GET, null, String.class);
+        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9092/api/v1/sp/karyawan/list?nama=an", HttpMethod.GET, null, String.class);
         System.out.println("response  =" + exchange.getBody());
         assertEquals(HttpStatus.OK, exchange.getStatusCode());
     }
@@ -104,7 +104,7 @@ public class KaryawanJunitRestTemplateMybatis {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", "*/*");
         headers.set("Content-Type", "application/json");
-        long id = 2L;
+        long id = 5L;
         ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9092/api/v1/sp/karyawan/delete/"+id, HttpMethod.DELETE, null, String.class);
         System.out.println("response  =" + exchange.getBody());
         assertEquals(HttpStatus.OK, exchange.getStatusCode());
