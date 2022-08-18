@@ -62,4 +62,5 @@ production:
     - heroku run --app aplikasi-training-karyawan migrate
   environment:
     name: production
+    url: https://aplikasi-training-karyawan.herokuapp.com
 
