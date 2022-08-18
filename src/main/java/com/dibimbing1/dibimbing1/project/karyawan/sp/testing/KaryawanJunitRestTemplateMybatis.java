@@ -42,7 +42,7 @@ public class KaryawanJunitRestTemplateMybatis {
         headers.set("Content-Type", "application/json");
         String bodyTesting = "{\n" +
                 "    \"id\":null,\n" +
-                "    \"nama\":\"fadli yandra1\",\n" +
+                "    \"nama\":\"fadli yandra4\",\n" +
                 "    \"jk\":\"laki-laki\",\n" +
                 "    \"dob\":\"1993-04-27\",\n" +
                 "    \"alamat\":\"Jakarta\",\n" +
