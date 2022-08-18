@@ -57,9 +57,9 @@ production:
     - gem install dpl
     - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
   script:
-    - dpl --provider=heroku --app=karyawan-training --api-key=d3f1c5f0-c7f5-4eaf-9103-abb9e413a986
+    - dpl --provider=heroku --app=aplikasi-training-karyawan --api-key=d3f1c5f0-c7f5-4eaf-9103-abb9e413a986
     - export HEROKU_API_KEY=d3f1c5f0-c7f5-4eaf-9103-abb9e413a986
-    - heroku run --app karyawan-training migrate
+    - heroku run --app aplikasi-training-karyawan migrate
   environment:
     name: production
 
