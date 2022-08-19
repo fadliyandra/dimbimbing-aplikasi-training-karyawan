@@ -30,7 +30,7 @@
         </tr>
         <tr th:each ="karyawan : ${listKaryawan}">
             <td><a th:href="@{/v1/view/karyawan/{karyawanId}(karyawanId=${karyawan.id})}" th:utext="${karyawan.id}">...</a></td>
-            <td><a th:href="@{/v1/view/karyawan/{karyawanId}(karyawanId=${karyawan.id})}" th:utext="${karyawan.name}">...</a></td>
+            <td><a th:href="@{/v1/view/karyawan/{karyawanId}(karyawanId=${karyawan.id})}" th:utext="${karyawan.nama}">...</a></td>
             <td><a th:href="@{/v1/view/karyawan/{karyawanId}(karyawanId=${karyawan.id})}" th:utext="${karyawan.jk}">...</a></td>
             <td><a th:href="@{/v1/view/karyawan/{karyawanId}(karyawanId=${karyawan.id})}" th:utext="${karyawan.dob}">...</a></td>
             <td><a th:href="@{/v1/view/karyawan/{karyawanId}(karyawanId=${karyawan.id})}" th:utext="${karyawan.alamat}">...</a></td>
